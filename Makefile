@@ -2,15 +2,13 @@ CC = gcc
 CFLAGS += -std=c99 -Wall -g -Wshadow -I/usr/include/python2.7
 LDLIBS += -lpython2.7
 
-
-all: cli
-
 # ---------- COMMAND LINE ----------
 
-cli.o: cli.c cli.h
+cli.o:
+	cd cli && $(CC) $(CFLAGS) cli.c -o ../CLI $(LDLIBS)
 
-cli: cli.o
+cli: cli/cli.o
 
 
 clean:
-	rm -f cli.o cli
+	rm -f cli/cli.o CLI

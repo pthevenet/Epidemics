@@ -2,7 +2,7 @@
 
 """
 	@file MME.py
-	@brief Mathematical epidemic models implementation
+	@brief Mathematical epidemic models implementation - Ross-McDonald
 	@author Pierre Thévenet
 	@date 2016-05-23
 """
@@ -12,7 +12,7 @@ from pylab import *
 from scipy.integrate import odeint
 
 ### ---------- RM (Ross-McDonald) ----------------------------------------------
-def RM_differentiate(syst, t, a, b1, b2, mu, gamma,):
+def RM_differentiate(syst, t, a, b1, b2, mu, gamma):
 	""" Differenciate syst according to the SIR model
 	Keyword arguments:
 	syst -- current system
@@ -36,7 +36,7 @@ def RM_differentiate(syst, t, a, b1, b2, mu, gamma,):
 	Svp =  - Ivp
 	return [Shp, Ihp, Svp, Ivp]
 
-def RM(Sh, Ih, Sv, Iv, a, b1, b2, mu, gamma, ti, tf, n):
+def RM(Sh, Ih, Sv, Iv, a, b1, b2, mu, gamma, t, n):
 	""" Applies RM model, returns a graph of the solution.
 	Keyword arguments:
 	Sh -- Initial number of healthy targets (humans H)
@@ -48,12 +48,11 @@ def RM(Sh, Ih, Sv, Iv, a, b1, b2, mu, gamma, ti, tf, n):
 	b2 -- Ration of bites to infected targets resulting in an infection for the carrier
 	mu -- Natural carrier mortality rate
 	gamma -- Cure rate for targets
-	ti -- initial time
-	tf -- final time
+	t -- time duration
 	n -- division of the time interval
 	"""
 	syst_CI = array([Sh, Ih, Sv, Iv])
-	step = (tf - ti)/float(n)
+	step = (t - 0)/float(n)
 
 	t = array([step * i for i in range(n)])
 
@@ -72,5 +71,9 @@ def RM(Sh, Ih, Sv, Iv, a, b1, b2, mu, gamma, ti, tf, n):
 	ylabel('Population')
 	legend()
 	savefig("results_RM.png")
-	show()
+	#show()
 	clf()
+
+def main(Sh, Ih, Sv, Iv, a, b1, b2, mu, gamma, t, n):
+	RM(int(Sh), int(Ih), int(Sv), int(Iv), float(a), float(b1), float(b2), float(mu), float(gamma), int(t), int(n))
+	return 0;
