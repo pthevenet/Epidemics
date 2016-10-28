@@ -5,6 +5,7 @@
 ## Brief
 
 Some epidemic models for simulation and plotting.
+An excuse to learn how to embed python with C :)
 
 ---
 ## Install
